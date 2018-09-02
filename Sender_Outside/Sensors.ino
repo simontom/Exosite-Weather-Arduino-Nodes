@@ -5,7 +5,7 @@ inline void turnSupplyDhtOn(void) {
 	delay(8);
 }
 
-inline void dhtSupplyDhtOff(void) {
+inline void turnSupplyDhtOff(void) {
 	pinMode(PIN_SUPPLY_DHT22, INPUT);
 	digitalWrite(PIN_SUPPLY_DHT22, LOW);
 }
@@ -53,7 +53,7 @@ void readDhtSensor(void) {
 		}
 		delay(DELAY_BETWEEN_DHT22_READINGS_MS);
 	}
-	dhtSupplyDhtOff();
+	turnSupplyDhtOff();
 
 	weatherData.temperature = (state == DHTLIB_OK) ? dht.temperature : (-1);
 	weatherData.humidity = (state == DHTLIB_OK) ? dht.humidity : (-1);
