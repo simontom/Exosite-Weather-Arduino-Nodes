@@ -3,18 +3,15 @@
 ////////
 #include <avr/power.h>
 #include <Low-Power\LowPower.h>
-
+#include "NetworkAddresses.h"
+#include "Settings.h"
+#include "WeatherData.h"
+#include "Radio.h"
 #include <LEDutilities.h>
-//#include <DHT.h>
 #include <DHTEsp32.h>
 #include <LiFuelGauge.h>
-#include <_My_Project_Network_Settings.h>
 #include <RH_RF22.h>
-#if USE_MESH_LIBRARY
 #include <RHMesh.h>
-#else
-#include <RHRouter.h>
-#endif
 
 
 // Pins
@@ -44,11 +41,7 @@ LEDutilities ledR(PIN_LED_R);
 
 // Wireless Transceivers
 RH_RF22 driver(3, 2);
-#if USE_MESH_LIBRARY
 RHMesh manager(driver, OUTSIDE_NODE_ADDR);
-#else
-RHRouter manager(driver, OUTSIDE_NODE_ADDR);
-#endif
 
 // Watchdog
 #define WATCHDOG_ENABLED true	/* MUST STAY FALSE UNTIL CORRECT (Optiboot) BOOTLOADER WITH WDT HANDLING ENABLED IS UPLOADED */

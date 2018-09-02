@@ -45,7 +45,7 @@ void readDhtSensor(void) {
 	turnSupplyDhtOn();
 	for (;;) {
 		state = dht.read22(PIN_DATA_DHT_22);
-		#if DEBUG_ENABLED && true
+		#if DEBUG_ENABLED
 			Serial.print(F("Reading state: ")); Serial.println(state);
 		#endif
 		if ((state == DHTLIB_OK) || (++iter >= MAX_DHT22_TRIED_READINGS)) {

@@ -4,7 +4,12 @@ void readSensors(void) {
 		Serial.println(F("\nsensing"));
 	#endif
 
-	bmp180.readTempAndPres(&weatherData.temperature, &weatherData.pressure);
+	float temperature;
+	float pressure;
+	bmp180.readTempAndPres(&temperature, &pressure);
+
+	weatherData.setTemperature(temperature);
+	weatherData.setPressure(pressure);
 
 	#if DEBUG_ENABLED && true
 		Serial.println(weatherData.pressure);

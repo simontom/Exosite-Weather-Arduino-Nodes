@@ -1,10 +1,12 @@
 ﻿
 // INCLUDES
 ////////
+#include "NetworkAddresses.h"
+#include "Settings.h"
+#include "WeatherData.h"
 #include <SPI.h>
 #include <LEDutilities.h>
 #include <DHT.h>
-#include <_My_Project_Network_Settings.h>
 #include <RH_RF22.h>
 #if USE_MESH_LIBRARY
 	#include <RHMesh.h>
@@ -15,10 +17,10 @@
 
 // Hardware configuration
 ////////
-#define ledPin 9
-#define dht22DataPin A2
+#define LED_PIN 9
+#define DHT22_DATA_PIN A2
 
-LEDutilities led(ledPin);
+LEDutilities led(LED_PIN);
 
 // Wireless Transceivers
 RH_RF22 driver(3, 2);
@@ -34,7 +36,7 @@ RHRouter manager(driver, SINK_NODE_ADDR);
 	unsigned long lastSendingTime = SENDING_PERIOD;
 #endif
 
-unsigned long lastDebugLedBlink = DEBUG_BLINKING_PERIOD_RECEIVER;
+unsigned long lastDebugLedBlink = LED_BLINKING_PERIOD_RECEIVER;
 unsigned long now;
 
 // Watchdog
@@ -70,7 +72,7 @@ void loop(void) {
 		);
 	#endif
 
-	TIME_DRIVEN_EVENT(now, lastDebugLedBlink, DEBUG_BLINKING_PERIOD_RECEIVER,
+	TIME_DRIVEN_EVENT(now, lastDebugLedBlink, LED_BLINKING_PERIOD_RECEIVER,
 		led.blinkLed(1, 17);
 	);
 

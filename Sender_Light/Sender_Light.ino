@@ -6,12 +6,14 @@
 #include <avr/power.h>
 #include <avr/wdt.h>
 
+#include "NetworkAddresses.h"
+#include "Settings.h"
+#include "WeatherData.h"
 #include <SPI.h>
 #include "I2C_Rev5\I2C.h"
 #include <LEDutilities.h>
 #include <BH1750FVI.h>
 #include <UVindex.h>
-#include <_My_Project_Network_Settings.h>
 #include <RH_RF22.h>
 #if USE_MESH_LIBRARY
 #include <RHMesh.h>

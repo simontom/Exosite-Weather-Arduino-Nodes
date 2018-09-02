@@ -76,8 +76,6 @@ typedef void *__builtin_va_list;
 #define pgm_read_ptr(address_short)   short()
 
 #include "Sender_Interier_DHT22.ino"
-#include "InitFunctions.ino"
-#include "RadioRoutines.ino"
 #include "Sensors.ino"
 #endif
 #endif

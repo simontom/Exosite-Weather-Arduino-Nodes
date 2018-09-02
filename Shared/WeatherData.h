@@ -2,13 +2,13 @@
 #ifndef _WEATHERDATA_h
 #define _WEATHERDATA_h
 
-#include "arduino.h"
+#include <arduino.h>
 
 class WeatherData {
 
 	private:
 
-		struct weatherData_t {
+		struct {
 			float component1;
 			float component2;
 			float component3;
@@ -23,7 +23,7 @@ class WeatherData {
 			data.component1 = -1;
 			data.component2 = -1;
 			data.component3 = -1;
-			data.component4 = -1;
+			data.component4 = 0;
 		}
 
 		unsigned int getDataLength() {

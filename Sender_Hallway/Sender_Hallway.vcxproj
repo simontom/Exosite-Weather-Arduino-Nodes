@@ -48,7 +48,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Sender_Hallway;$(ProjectDir)..\..\..\libraries\BMP180;$(ProjectDir)..\..\..\libraries\I2C_Rev5;$(ProjectDir)..\..\..\libraries\LEDutilities;$(ProjectDir)..\..\..\libraries\RadioHead_WirelessLIB;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Sender_Hallway;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\libraries\I2C_Rev5;$(ProjectDir)..\..\..\libraries\BMP180;$(ProjectDir)..\..\..\libraries\LEDutilities;$(ProjectDir)..\..\..\libraries\RadioHead_WirelessLIB;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\libraries;$(ProjectDir)..\..\..\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\Exosite-Weather-Arduino-Nodes;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include\avr;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.Sender_Hallway.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=8000000L;ARDUINO=10804;ARDUINO_AVR_PRO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -89,7 +89,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Shared\NetworkAddresses.h" />
+    <ClInclude Include="..\Shared\Radio.h" />
+    <ClInclude Include="..\Shared\Settings.h" />
+    <ClInclude Include="..\Shared\Utilities.h" />
+    <ClInclude Include="..\Shared\WeatherData.h" />
     <ClInclude Include="__vm\.Sender_Hallway.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Shared\Radio.cpp" />
+    <ClCompile Include="..\Shared\Utilities.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>

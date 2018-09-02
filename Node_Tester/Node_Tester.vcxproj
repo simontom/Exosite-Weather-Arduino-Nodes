@@ -88,6 +88,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Node_Tester;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\libraries\LEDutilities;$(ProjectDir)..\..\..\libraries\RadioHead_WirelessLIB;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\libraries;$(ProjectDir)..\..\..\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\Exosite-Weather-Arduino-Nodes;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include\avr;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.Node_Tester.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10804;ARDUINO_AVR_MINI;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -133,7 +136,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Shared\NetworkAddresses.h" />
+    <ClInclude Include="..\Shared\Radio.h" />
+    <ClInclude Include="..\Shared\Settings.h" />
+    <ClInclude Include="..\Shared\Utilities.h" />
+    <ClInclude Include="..\Shared\WeatherData.h" />
     <ClInclude Include="__vm\.Node_Tester.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Shared\Radio.cpp" />
+    <ClCompile Include="..\Shared\Utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

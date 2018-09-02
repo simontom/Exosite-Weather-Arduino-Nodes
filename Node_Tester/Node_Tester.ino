@@ -1,10 +1,12 @@
 
 // INCLUDES
 ////////////
+#include "NetworkAddresses.h"
+#include "Settings.h"
+#include "WeatherData.h"
 #include <SPI.h>
 #include <LEDutilities.h>
 #include <RH_RF22.h>
-#include <_My_Project_Network_Settings.h>
 #if USE_MESH_LIBRARY
 #include <RHMesh.h>
 #else
@@ -16,9 +18,9 @@
 ////////
 
 // Pins
-#define ledPin 9
+#define LED_PIN 9
 
-LEDutilities led(ledPin);
+LEDutilities led(LED_PIN);
 
 // Wireless Transceivers
 RH_RF22 driver(3, 2);

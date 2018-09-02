@@ -45,12 +45,12 @@ void initRadio(void) {
 
 
 void initWholeDevice() {
-	#if DEBUG_ENABLED && true
+	#if DEBUG_ENABLED
 		Serial.begin(57600);
 		printFreeRam(); ////
 	#endif
 
-	#if !(DEBUG_ENABLED && true)
+	#if !DEBUG_ENABLED
 		power_usart0_disable();
 	#endif
 	//power_twi_disable();
@@ -63,7 +63,7 @@ void initWholeDevice() {
 	ledG.offLed();
 	ledR.offLed();
 
-	#if DEBUG_ENABLED && true
+	#if DEBUG_ENABLED
 		Serial.println(F("initWholeDevice end"));
 		printFreeRam(); ////
 	#endif

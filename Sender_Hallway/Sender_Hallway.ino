@@ -1,11 +1,13 @@
 
 // INCLUDES
 ////////////
+#include "NetworkAddresses.h"
+#include "Settings.h"
+#include "WeatherData.h"
 #include <SPI.h>
 #include <I2C_Rev5\I2C.h>
 #include <BMP180.h>
 #include <LEDutilities.h>
-#include <_My_Project_Network_Settings.h>
 #include <RH_RF22.h>
 #if USE_MESH_LIBRARY
 #include <RHMesh.h>
@@ -18,15 +20,16 @@
 ////////
 
 // Pins
-#define ledPin 9
+#define LED_PIN 9
 
 // Sensors
 BMP180 bmp180;
+WeatherData weatherData;
 
-LEDutilities led(ledPin);
+LEDutilities led(LED_PIN);
 
 unsigned long lastSendingTime = SENDING_PERIOD;
-unsigned long lastDebugLedBlink = DEBUG_BLINKING_PERIOD;
+unsigned long lastDebugLedBlink = LED_BLINKING_PERIOD;
 unsigned long now;
 
 // Wireless Transceivers
@@ -80,12 +83,12 @@ void loop(void) {
 
 	TIME_DRIVEN_EVENT(now, lastSendingTime, SENDING_PERIOD,
 		readSensors();
-		if (weatherData.pressure != (-1)) {
+		if (weatherData.getPressure() != (-1)) {
 			sendData();
 		}
 	);
 
-	TIME_DRIVEN_EVENT(now, lastDebugLedBlink, DEBUG_BLINKING_PERIOD,
+	TIME_DRIVEN_EVENT(now, lastDebugLedBlink, LED_BLINKING_PERIOD,
 		led.toggleLed(2, 28);
 	);
 

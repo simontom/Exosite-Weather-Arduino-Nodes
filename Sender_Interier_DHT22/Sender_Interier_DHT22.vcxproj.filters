@@ -16,19 +16,34 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Sender_Interier_DHT22.ino" />
-    <None Include="InitFunctions.ino" />
-    <None Include="RadioRoutines.ino" />
     <None Include="Sensors.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Sender_Interier_DHT22.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\WeatherData.h">
+    <ClInclude Include="..\Shared\NetworkAddresses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\_My_Project_Network_Settings.h">
+    <ClInclude Include="..\Shared\Radio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Shared\Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\Utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\WeatherData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Shared\Radio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
