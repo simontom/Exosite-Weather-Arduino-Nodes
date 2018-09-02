@@ -1,10 +1,11 @@
 
 // INCLUDES
 ////////////
+#include "WeatherData.h"
 #include <SPI.h>
 #include <LEDutilities.h>
-#include <DHT.h>
-#include <_My_Project_Network_Settings.h>
+#include <DHT_LITE.h>
+#include "_My_Project_Network_Settings.h"
 #include <RH_RF22.h>
 #if USE_MESH_LIBRARY
 #include <RHMesh.h>
@@ -21,7 +22,7 @@
 #define dht22DataPin A3
 
 // Sensors
-DHT dht22(dht22DataPin, DHT22);
+DHT_LITE dht22(dht22DataPin, false, DHT22);
 LEDutilities led(ledPin);
 
 // 20 min = 20 min * 60 s * 1000 ms = 1'200'000 ms
@@ -49,23 +50,23 @@ uint8_t tx_errors_counter = 0;
 
 
 void setup(void) {
-	#if WATCHDOG_ENABLED
-		wdt_disable();
-		delay(2);
-		wdt_reset();
-		wdt_enable(WATCHDOG_RESET_TIME);
-	#endif
+#if WATCHDOG_ENABLED
+	wdt_disable();
+	delay(2);
+	wdt_reset();
+	wdt_enable(WATCHDOG_RESET_TIME);
+#endif
 
-	#if DEBUG_ENABLED && true
-		Serial.begin(57600);
-		printFreeRam(); ////
-	#endif
-	
+#if DEBUG_ENABLED && true
+	Serial.begin(57600);
+	printFreeRam(); ////
+#endif
+
 	initRadio();
 
-	#if WATCHDOG_ENABLED
-		wdt_reset();
-	#endif
+#if WATCHDOG_ENABLED
+	wdt_reset();
+#endif
 
 	led.blinkLed(3, 222);
 
@@ -74,19 +75,19 @@ void setup(void) {
 
 
 void loop(void) {
-	#if WATCHDOG_ENABLED
-		wdt_reset();
-	#endif
+#if WATCHDOG_ENABLED
+	wdt_reset();
+#endif
 
 	now = millis();
 
 	TIME_DRIVEN_EVENT(now, lastSendingTime, SENDING_PERIOD,
 		readSensors();
+	wdt_reset();
+	if (weatherData.humidity != (-1)) {
 		wdt_reset();
-		if (weatherData.humidity != (-1)) {
-			wdt_reset();
-			sendData();
-		}
+		sendData();
+	}
 	);
 
 	wdt_reset();
@@ -97,16 +98,16 @@ void loop(void) {
 
 	maintainRouting();
 
-	#if DEBUG_ENABLED && true
-		if (Serial.available()) {
-			if (Serial.read() == 'i') {
-				manager.printRoutingTable();
-				Serial.print(F("RSSI: "));
-				Serial.println(driver.lastRssi());
-				printFreeRam(); ////
-				Serial.println();
-			}
-			Serial.flush();
+#if DEBUG_ENABLED && true
+	if (Serial.available()) {
+		if (Serial.read() == 'i') {
+			manager.printRoutingTable();
+			Serial.print(F("RSSI: "));
+			Serial.println(driver.lastRssi());
+			printFreeRam(); ////
+			Serial.println();
 		}
-	#endif
+		Serial.flush();
+	}
+#endif
 }

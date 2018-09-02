@@ -6,7 +6,6 @@ void readSensors(void) {
 
 	do {
 		delay(10);
-		wdt_reset();
 		dht22.doReadings();
 		#if WATCHDOG_ENABLED
 			wdt_reset();
