@@ -10,10 +10,10 @@ class WeatherData {
 
 	private:
 	struct data_t {
-		float component1;
-		float component2;
-		float component3;
-		uint16_t component4;
+		float		component1;
+		float		component2;
+		float		component3;
+		uint16_t	component4;
 	} data;
 	unsigned int dataLength = sizeof(data);
 	uint8_t* dataPointer = (uint8_t*)&data;
@@ -33,6 +33,7 @@ class WeatherData {
 		return dataPointer;
 	}
 
+	/* Using COMPONENT_1 */
 	void setTemperature(float temperature) {
 		data.component1 = temperature;
 	}
@@ -40,6 +41,7 @@ class WeatherData {
 		return data.component1;
 	}
 
+	/* Using COMPONENT_2 */
 	void setHumidity(float humidity) {
 		data.component2 = humidity;
 	}
@@ -47,6 +49,7 @@ class WeatherData {
 		return data.component2;
 	}
 
+	/* Using COMPONENT_3 */
 	void setPressure(float pressure) {
 		data.component3 = pressure;
 	}
@@ -54,6 +57,7 @@ class WeatherData {
 		return data.component3;
 	}
 
+	/* Using COMPONENT_4 */
 	void setMilivolts(uint16_t milivolts) {
 		data.component4 = milivolts;
 	}
@@ -61,6 +65,7 @@ class WeatherData {
 		return data.component4;
 	}
 
+	/* Using COMPONENT_3 */
 	void setStateOfCharge(float stateOfCharge) {
 		data.component3 = stateOfCharge;
 	}
@@ -68,6 +73,7 @@ class WeatherData {
 		return data.component3;
 	}
 
+	/* Using COMPONENT_1 */
 	void setLightIntensityLx(float lightIntensityLx) {
 		data.component1 = lightIntensityLx;
 	}
@@ -75,6 +81,7 @@ class WeatherData {
 		return data.component1;
 	}
 
+	/* Using COMPONENT_2 */
 	void setUvIndex(uint8_t uvIndex) {
 		data.component2 = uvIndex;
 	}

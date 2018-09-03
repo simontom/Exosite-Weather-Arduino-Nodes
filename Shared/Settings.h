@@ -9,7 +9,7 @@
 // Switches
 ////////////////////////////////
 #define WATCHDOG_ENABLED	false	/* MUST STAY FALSE UNTIL CORRECT (Optiboot) BOOTLOADER WITH WDT HANDLING ENABLED IS UPLOADED */
-#define DEBUG_ENABLED		true
+#define DEBUG_ENABLED		false
 #define SINK_ENABLE_SENSOR	false
 
 #define WATCHDOG_RESET_TIME			WDTO_8S

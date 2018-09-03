@@ -41,13 +41,18 @@ void Radio::maintainRouting(void) {
 	// Call "recvfromAck" to do all the routing/mesh discovery/internal magic
 	uint8_t len = buffLen;
 	if (manager->recvfromAck(buff, &len, &from)) {
+		#if DEBUG_ENABLED
+		Serial.print(F("received_"));
+		Serial.println(millis());
+		#endif
 		manager->sendtoWait(buff, len, from);
 	}
 }
 
 void Radio::sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led) {
 	#if DEBUG_ENABLED
-	Serial.println(F("sending"));
+	Serial.print(F("\nsending_"));
+	Serial.println(millis());
 	printFreeRam();
 	#endif
 
@@ -98,7 +103,9 @@ void Radio::sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities
 	Serial.print(F("RSSI: "));
 	Serial.println(driver->lastRssi());
 	printFreeRam(); ////
-	Serial.println(F("sent\n"));
+	Serial.print(F("sent_"));
+	Serial.println(millis());
+	Serial.println(F("\n"));
 	delay(111);
 	#endif
 }

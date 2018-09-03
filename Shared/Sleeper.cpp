@@ -40,6 +40,10 @@ void Sleeper::sleep(const uint16_t milivolts) {
 }
 
 inline uint16_t Sleeper::getSleepCycles(const uint16_t milivolts) {
+	#if DEBUG_ENABLED
+	return SLEEP_CYCLES_PER_TRANSMISSION;
+	#endif
+
 	if (milivolts >= 3855) {
 		return SLEEP_CYCLES_PER_TRANSMISSION;
 	}

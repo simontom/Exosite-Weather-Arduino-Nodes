@@ -23,8 +23,6 @@ class SensorDht22Exterier : public SensorDht22Interier {
 
 	protected:
 		uint8_t sensorSupplyPin;
-		Radio &manager;
-		DHT_LITE *dht22;
 		LiFuelGauge *liFuelGauge;
 
 		virtual boolean readDataFromSensors(WeatherData &data);

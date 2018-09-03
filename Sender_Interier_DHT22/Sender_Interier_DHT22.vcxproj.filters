@@ -24,9 +24,6 @@
     <ClInclude Include="..\Shared\Radio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shared\SensorDht22.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Shared\Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,9 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Shared\Radio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\SensorDht22.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Shared\Utilities.cpp">

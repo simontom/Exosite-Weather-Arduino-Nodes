@@ -7,6 +7,7 @@
 #include "Sleeper.h"
 #include "SensorDht22Exterier.h"
 
+#include <avr/power.h>
 #include <LEDutilities.h>
 
 
@@ -32,7 +33,7 @@ void setup(void) {
 
 	#if DEBUG_ENABLED
 	Serial.begin(57600);
-	printFreeRam(); ////
+	printFreeRam();
 	#endif
 
 	PROTECT_WITH_WDT(
@@ -43,7 +44,6 @@ void setup(void) {
 
 		greenLed.blinkLed(2, 222);
 		manager.init(redLed);
-		//liFuelGauge.reset();
 		redLed.blinkLed(2, 222);
 
 		greenLed.offLed();
@@ -58,18 +58,18 @@ void loop(void) {
 	#endif
 
 	if (sensors.readSensors(weatherData)) {
-
-		manager.sendData(SINK_NODE_ADDR, weatherData);
-		manager.sendData(SINK_NODE_ADDR, weatherData, &redLed);
-		
+		#if DEBUG_ENABLED
 		PROTECT_WITH_WDT(
-			#if DEBUG_ENABLED
-			manager.sendData(SINK_NODE_ADDR, weatherData, &redLed);;
-			#else
-			manager.sendData(SINK_NODE_ADDR, weatherData);;
-			#endif
+			manager.sendData(SINK_NODE_ADDR, weatherData, &redLed);
 		);
+		#else
+		PROTECT_WITH_WDT(
+			manager.sendData(SINK_NODE_ADDR, weatherData);
+		);
+		#endif
 	}
+
 	manager.maintainRouting();
+
 	sleeper.sleep(weatherData.getMilivolts());
 }
