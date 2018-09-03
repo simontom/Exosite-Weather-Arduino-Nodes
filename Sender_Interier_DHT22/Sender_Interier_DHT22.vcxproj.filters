@@ -16,13 +16,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Sender_Interier_DHT22.ino" />
-    <None Include="Sensors.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Shared\NetworkAddresses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Shared\Radio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\SensorDht22.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Shared\Settings.h">
@@ -34,7 +36,13 @@
     <ClInclude Include="..\Shared\WeatherData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Shared\SensorBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="__vm\.Sender_Interier_DHT22.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\SensorDht22Interier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -42,7 +50,16 @@
     <ClCompile Include="..\Shared\Radio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Shared\SensorDht22.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\Shared\Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\SensorBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\SensorDht22Interier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

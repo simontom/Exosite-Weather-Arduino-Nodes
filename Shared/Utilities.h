@@ -35,7 +35,7 @@
 		wdt_disable(); \
 	} while(false)
 #else
-	#define PROTECT_WITH_WDT(_body_)	\
+#define PROTECT_WITH_WDT(_body_)	\
 	do { \
 		_body_ \
 	} while(false)
@@ -50,7 +50,6 @@ extern void initializeWdtOnStartup(void);
 #endif
 
 extern uint16_t getVoltage_mV(uint8_t voltagePin);
-
 extern void rebootDevice(void);
 
 #if DEBUG_ENABLED

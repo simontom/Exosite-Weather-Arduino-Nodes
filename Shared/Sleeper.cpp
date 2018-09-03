@@ -5,7 +5,7 @@
 Sleeper::Sleeper(const Radio &manager) : manager(manager) {
 }
 
-void Sleeper::sleep(const WeatherData &data) {
+void Sleeper::sleep(const uint16_t milivolts) {
 	//DEBUG_WITH_LED_GREEN(
 	#if DEBUG_ENABLED
 		Serial.println(F("sleep\n"));
@@ -17,7 +17,7 @@ void Sleeper::sleep(const WeatherData &data) {
 	);
 	//);
 
-	sleep_cycles_remaining = getSleepCycles(data);
+	sleep_cycles_remaining = getSleepCycles(milivolts);
 	do {
 		LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
 
@@ -39,9 +39,7 @@ void Sleeper::sleep(const WeatherData &data) {
 	delay(8);
 }
 
-inline uint16_t Sleeper::getSleepCycles(const WeatherData &data) {
-	uint16_t milivolts = data.getMilivolts();
-
+inline uint16_t Sleeper::getSleepCycles(const uint16_t milivolts) {
 	if (milivolts >= 3855) {
 		return SLEEP_CYCLES_PER_TRANSMISSION;
 	}

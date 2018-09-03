@@ -7,9 +7,7 @@
 #include "WeatherData.h"
 #include "Settings.h"
 
-#include <Arduino.h>
-#include <avr/wdt.h>
-#include <Low-Power\LowPower.h>
+#include <LowPower.h>
 
 
 // Settings
@@ -20,35 +18,20 @@
 #define SLEEP_CYCLES_PER_TRANSMISSION_ON_LOW_ENERGY		225 /* +- 225 * 8s = 30 minutes */
 #define SLEEP_CYCLES_PER_TRANSMISSION_ON_TOO_LOW_ENERGY	450 /* +- 450 * 8s = 60 minutes */
 
-#define TIME_ASLEEP wdt_8s
-
-// Helper Definitions
-/////////////////////////////////////////////////////////
-typedef enum {
-	wdt_16ms = 0,
-	wdt_32ms,
-	wdt_64ms,
-	wdt_128ms,
-	wdt_250ms,
-	wdt_500ms,
-	wdt_1s,
-	wdt_2s,
-	wdt_4s,
-	wdt_8s
-} wdt_prescalar_e;
+#define TIME_ASLEEP WDTO_8S
 
 
 class Sleeper {
 	
 	public:
 		Sleeper(const Radio &manager);
-		inline void sleep(const WeatherData &data);
+		void sleep(const uint16_t milivolts);
 
 	private:
 		const Radio &manager;
 		uint16_t sleep_cycles_remaining;
 
-		inline uint16_t getSleepCycles(const WeatherData &data);
+		inline uint16_t getSleepCycles(const uint16_t milivolts);
 
 };
 

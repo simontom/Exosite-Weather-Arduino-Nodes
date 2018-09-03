@@ -39,7 +39,7 @@ uint16_t getVoltage_mV(uint8_t voltagePin) {
 
 void rebootDevice(void) {
 	#if DEBUG_ENABLED
-		Serial.println(F(".... REBOOTING DEVICE ...."));
+	Serial.println(F(".... REBOOTING DEVICE ...."));
 	#endif
 	wdt_enable(WATCHDOG_REBOOT_DEVICE_TIME);
 	for (; ; ) { ; }
@@ -47,13 +47,13 @@ void rebootDevice(void) {
 
 #if DEBUG_ENABLED
 void printWeatherData(WeatherData &data) {
-	Serial.print(weatherData.getTemperature());
+	Serial.print(data.getTemperature());
 	Serial.println(F("*C"));
-	Serial.print(weatherData.getHumidity());
+	Serial.print(data.getHumidity());
 	Serial.println(F("%"));
-	Serial.print(weatherData.getMilivolts());
+	Serial.print(data.getMilivolts());
 	Serial.println(F("mV"));
-	Serial.print(weatherData.getPressure());
+	Serial.print(data.getPressure());
 	Serial.println(F("%"));
 }
 

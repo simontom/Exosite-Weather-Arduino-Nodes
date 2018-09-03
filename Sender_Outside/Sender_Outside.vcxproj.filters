@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Sender_Outside.ino" />
-    <None Include="Sensors.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Shared\NetworkAddresses.h">
@@ -37,10 +36,13 @@
     <ClInclude Include="..\Shared\Sleeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shared\SensorDht22.h">
+    <ClInclude Include="..\Shared\SensorBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shared\SensorBase.h">
+    <ClInclude Include="..\Shared\SensorDht22Interier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\SensorDht22Exterier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="__vm\.Sender_Outside.vsarduino.h">
@@ -57,10 +59,13 @@
     <ClCompile Include="..\Shared\Sleeper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shared\SensorDht22.cpp">
+    <ClCompile Include="..\Shared\SensorBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shared\SensorBase.cpp">
+    <ClCompile Include="..\Shared\SensorDht22Exterier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\SensorDht22Interier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,7 +11,6 @@
 class SensorBase {
 	
 	public:
-		SensorBase(void);
 		boolean readSensors(WeatherData &data);
 
 	protected:

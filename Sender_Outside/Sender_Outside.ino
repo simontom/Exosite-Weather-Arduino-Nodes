@@ -1,75 +1,75 @@
 
-// INCLUDES
-////////
-#include <avr/power.h>
-#include <Low-Power\LowPower.h>
 #include "NetworkAddresses.h"
 #include "Radio.h"
 #include "Settings.h"
 #include "Utilities.h"
 #include "WeatherData.h"
 #include "Sleeper.h"
+#include "SensorDht22Exterier.h"
+
 #include <LEDutilities.h>
-#include <DHTEsp32.h>
-#include <LiFuelGauge.h>
-#include <RH_RF22.h>
-#include <RHMesh.h>
 
 
 // Pins
-#define LED_R_PIN			6
-#define LED_G_PIN			9
+#define LED_RED_PIN			6
+#define LED_GREEN_PIN		9
 #define SUPPLY_DHT22_PIN	8
 #define DATA_DHT_22_PIN		7
 
+WeatherData weatherData;
 Radio manager(OUTSIDE_NODE_ADDR, SLAVE_SELECT_PIN, INTERRUPT_PIN);
 Sleeper sleeper(manager);
+SensorDht22Exterier sensors(manager, DATA_DHT_22_PIN, SUPPLY_DHT22_PIN);
 
-// Sensors
-WeatherData weatherData;
-DHTEsp32 dht;
-LiFuelGauge liFuelGauge(MAX17043);
+LEDutilities redLed(LED_RED_PIN);
+LEDutilities greenLed(LED_GREEN_PIN);
 
-LEDutilities ledR(LED_R_PIN);
-LEDutilities ledG(LED_G_PIN);
 
 void setup(void) {
 	#if WATCHDOG_ENABLED
-		initializeWdtOnStartup();
+	initializeWdtOnStartup();
 	#endif
 
 	#if DEBUG_ENABLED
-		Serial.begin(57600);
-		printFreeRam(); ////
+	Serial.begin(57600);
+	printFreeRam(); ////
 	#endif
 
 	PROTECT_WITH_WDT(
 		#if !DEBUG_ENABLED
-			power_usart0_disable();
+		power_usart0_disable();
 		#endif
 		//power_twi_disable();
 
-		ledG.blinkLed(2, 222);
-		manager.init(ledR);
+		greenLed.blinkLed(2, 222);
+		manager.init(redLed);
 		//liFuelGauge.reset();
-		ledR.blinkLed(2, 222);
+		redLed.blinkLed(2, 222);
 
-		ledG.offLed();
-		ledR.offLed();
+		greenLed.offLed();
+		redLed.offLed();
 	);
 }
 
 
 void loop(void) {
 	#if DEBUG_ENABLED
-		printFreeRam();
+	printFreeRam();
 	#endif
 
-	if (readSensors()) {
+	if (sensors.readSensors(weatherData)) {
+
+		manager.sendData(SINK_NODE_ADDR, weatherData);
+		manager.sendData(SINK_NODE_ADDR, weatherData, &redLed);
+		
 		PROTECT_WITH_WDT(
-			manager.sendData(SINK_NODE_ADDR, weatherData);
+			#if DEBUG_ENABLED
+			manager.sendData(SINK_NODE_ADDR, weatherData, &redLed);;
+			#else
+			manager.sendData(SINK_NODE_ADDR, weatherData);;
+			#endif
 		);
 	}
 	manager.maintainRouting();
-	sleeper.sleep(weatherData);
+	sleeper.sleep(weatherData.getMilivolts());
 }
