@@ -9,64 +9,13 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Sender_Outside.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Shared\NetworkAddresses.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\Radio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\Settings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\Utilities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\WeatherData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\Sleeper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\SensorBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\SensorDht22Interier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\SensorDht22Exterier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="__vm\.Sender_Outside.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Shared\Radio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\Utilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\Sleeper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\SensorBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\SensorDht22Exterier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\SensorDht22Interier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -54,6 +54,7 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
+    <Import Project="..\SharedCodeProject\SharedCodeProject.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -117,10 +118,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Sender_Outside;$(ProjectDir)..\..\..\libraries\LEDutilities;$(ProjectDir)..\..\..\libraries\RadioHead_WirelessLIB;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\libraries\Low-Power;$(ProjectDir)..\..\..\libraries\DHT_LITE;$(ProjectDir)..\..\..\libraries\LiFuelGauge;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\libraries;$(ProjectDir)..\..\..\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\SharedCodeFiles;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\avr\include\avr;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\PROGS\arduino-1.8.4\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.Sender_Outside.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10804;ARDUINO_AVR_PRO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -134,24 +139,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Shared\NetworkAddresses.h" />
-    <ClInclude Include="..\Shared\Radio.h" />
-    <ClInclude Include="..\Shared\SensorBase.h" />
-    <ClInclude Include="..\Shared\SensorDht22Exterier.h" />
-    <ClInclude Include="..\Shared\SensorDht22Interier.h" />
-    <ClInclude Include="..\Shared\Settings.h" />
-    <ClInclude Include="..\Shared\Sleeper.h" />
-    <ClInclude Include="..\Shared\Utilities.h" />
-    <ClInclude Include="..\Shared\WeatherData.h" />
     <ClInclude Include="__vm\.Sender_Outside.vsarduino.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Shared\Radio.cpp" />
-    <ClCompile Include="..\Shared\SensorBase.cpp" />
-    <ClCompile Include="..\Shared\SensorDht22Interier.cpp" />
-    <ClCompile Include="..\Shared\SensorDht22Exterier.cpp" />
-    <ClCompile Include="..\Shared\Sleeper.cpp" />
-    <ClCompile Include="..\Shared\Utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{48b6cd0b-5439-4a26-9178-b5ffe3893e7b}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\NetworkAddresses.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\Radio.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\SensorBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\SensorDht22Exterier.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\SensorDht22Interier.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\Settings.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\Sleeper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\Utilities.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\WeatherData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\Radio.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\SensorBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\SensorDht22Exterier.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\SensorDht22Interier.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\Sleeper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\SharedCodeFiles\Utilities.cpp" />
+  </ItemGroup>
+</Project>

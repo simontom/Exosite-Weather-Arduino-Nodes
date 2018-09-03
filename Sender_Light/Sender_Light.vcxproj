@@ -35,6 +35,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
+  <ImportGroup Label="Shared">
+    <Import Project="..\SharedCodeProject\SharedCodeProject.vcxitems" Label="Shared" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -92,16 +95,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Shared\NetworkAddresses.h" />
-    <ClInclude Include="..\Shared\Radio.h" />
-    <ClInclude Include="..\Shared\Settings.h" />
-    <ClInclude Include="..\Shared\Utilities.h" />
-    <ClInclude Include="..\Shared\WeatherData.h" />
     <ClInclude Include="__vm\.Sender_Light.vsarduino.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Shared\Radio.cpp" />
-    <ClCompile Include="..\Shared\Utilities.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
