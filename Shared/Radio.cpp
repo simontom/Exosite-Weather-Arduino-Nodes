@@ -42,7 +42,11 @@ void Radio::maintainRouting(void) {
 	uint8_t len = buffLen;
 	if (manager->recvfromAck(buff, &len, &from)) {
 		#if DEBUG_ENABLED
-		Serial.print(F("received_"));
+		Serial.print(F("received from "));
+		Serial.print(from);
+		Serial.print(F(" data length "));
+		Serial.print(len);
+		Serial.print(F(" _ "));
 		Serial.println(millis());
 		#endif
 		manager->sendtoWait(buff, len, from);
