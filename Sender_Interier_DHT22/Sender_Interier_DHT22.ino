@@ -11,8 +11,6 @@
 #include <DHT_LITE.h>
 
 
-
-
 // Wireless Transceivers' Addresses
 ////////
 //#define NODE_ADDR	BEDROOM_NODE_ADDR
@@ -71,7 +69,7 @@ void loop(void) {
 			#if WATCHDOG_ENABLED
 				wdt_reset();
 			#endif
-			manager.sendData(weatherData, led, SINK_NODE_ADDR);
+			manager.sendData(SINK_NODE_ADDR, weatherData, &led);
 		}
 	);
 
@@ -83,12 +81,12 @@ void loop(void) {
 
 	manager.maintainRouting();
 
-	#if DEBUG_ENABLED && true
+	#if DEBUG_ENABLED
 		if (Serial.available()) {
 			if (Serial.read() == 'i') {
 				manager.printRoutingTable();
 				Serial.print(F("RSSI: "));
-				Serial.println(driver.lastRssi());
+				Serial.println(manager.getLastRssi());
 				printFreeRam(); ////
 				Serial.println();
 			}

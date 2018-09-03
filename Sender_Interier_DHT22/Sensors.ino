@@ -1,9 +1,5 @@
 
 void readSensors(void) {
-	#if DEBUG_ENABLED
-		Serial.println(F("\nsensing"));
-	#endif
-
 	do {
 		delay(10);
 		dht22.doReadings();
@@ -15,11 +11,5 @@ void readSensors(void) {
 
 	weatherData.setTemperature(dht22.isDataCorrect() ? dht22.getTemperature() : (-1));
 	weatherData.setHumidity(dht22.isDataCorrect() ? dht22.getHumidity() : (-1));
-
-	#if DEBUG_ENABLED
-		Serial.println(weatherData.getTemperature());
-		Serial.println(weatherData.getHumidity());
-		Serial.println(F("sensed"));
-	#endif
 }
 

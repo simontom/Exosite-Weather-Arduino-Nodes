@@ -21,7 +21,7 @@ void fallAsleep(void) {
 		driver.sleep();
 	//);
 	
-	sleep_cycles_remaining = sleep_cycles_per_transmission;
+	sleep_cycles_remaining = SLEEP_CYCLES_PER_TRANSMISSION;
 	setupWatchdog(TIME_ASLEEP);
 	while( sleep_cycles_remaining-- ) {
 		set_sleep_mode(SLEEP_MODE_PWR_DOWN);

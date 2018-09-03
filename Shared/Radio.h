@@ -6,9 +6,11 @@
 #include "WeatherData.h"
 #include "LEDutilities.h"
 #include "Settings.h"
+
 #include <RH_RF22.h>
 #include <RHMesh.h>
-#include <arduino.h>
+
+#include <Arduino.h>
 #include <avr/wdt.h>
 
 
@@ -29,7 +31,11 @@ class Radio {
 		Radio(uint8_t address, uint8_t slaveSelectPin = 3, uint8_t interruptPin = 2);
 		void init(LEDutilities &led);
 		void maintainRouting(void);
-		void sendData(WeatherData &data, LEDutilities &led, uint8_t destinationAddress);
+		void sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led = nullptr);
+		inline void sleep(void) const { driver->sleep(); }
+
+		inline void printRoutingTable(void);
+		inline int16_t getLastRssi(void);
 
 	private:
 		RH_RF22 *driver;

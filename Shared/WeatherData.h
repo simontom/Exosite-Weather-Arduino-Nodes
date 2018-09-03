@@ -2,7 +2,6 @@
 #ifndef _WEATHERDATA_h
 #define _WEATHERDATA_h
 
-#include <arduino.h>
 
 class WeatherData {
 
@@ -26,46 +25,60 @@ class WeatherData {
 			data.component4 = 0;
 		}
 
-		unsigned int getDataLength() {
+		unsigned int getDataLength(void) const {
 			return dataLength;
 		}
-		uint8_t* getDataPointer() {
+		uint8_t* getDataPointer(void) const {
 			return dataPointer;
 		}
 
 		void setTemperature(float temperature) {
 			data.component1 = temperature;
 		}
-		float getTemperature() {
+		float getTemperature(void) const {
 			return data.component1;
 		}
 
 		void setHumidity(float humidity) {
 			data.component2 = humidity;
 		}
-		float getHumidity() {
+		float getHumidity(void) const {
 			return data.component2;
 		}
 
 		void setPressure(float pressure) {
 			data.component3 = pressure;
 		}
-		float getPressure() {
+		float getPressure(void) {
 			return data.component3;
 		}
 
 		void setMilivolts(uint16_t milivolts) {
 			data.component4 = milivolts;
 		}
-		uint16_t getMilivolts() {
+		uint16_t getMilivolts(void) const {
 			return data.component4;
 		}
 
 		void setStateOfCharge(float stateOfCharge) {
 			data.component3 = stateOfCharge;
 		}
-		float getStateOfCharge() {
-			return data.component3;
+		float getStateOfCharge(void) const  {
+			return data.component3;	
+		}
+
+		void setLightIntensityLx(float lightIntensityLx) {
+			data.component1 = lightIntensityLx;
+		}
+		float getLightIntensityLx(void) const {
+			return data.component1;
+		}
+
+		void setUvIndex(uint8_t uvIndex) {
+			data.component2 = uvIndex;
+		}
+		float getUvIndex(void) const {
+			return data.component2;
 		}
 
 };

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Receiver", "Receiver.vcxproj", "{F0B6B58E-2647-42F2-A158-9AE4C4657E44}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sender_Interier_DHT22", "..\Sender_Interier_DHT22\Sender_Interier_DHT22.vcxproj", "{C6BB011C-315B-4AA4-966A-92C2ACC98FA3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sender_Hallway", "..\Sender_Hallway\Sender_Hallway.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PassingDataTest", "..\PassingDataTest\PassingDataTest.vcxproj", "{246DB63D-CF72-435D-8FFE-7EBA1B869EF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,8 +67,17 @@ Global
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x64.ActiveCfg = Release|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
+		{246DB63D-CF72-435D-8FFE-7EBA1B869EF1}.Debug|x64.ActiveCfg = Debug|Win32
+		{246DB63D-CF72-435D-8FFE-7EBA1B869EF1}.Debug|x86.ActiveCfg = Debug|Win32
+		{246DB63D-CF72-435D-8FFE-7EBA1B869EF1}.Debug|x86.Build.0 = Debug|Win32
+		{246DB63D-CF72-435D-8FFE-7EBA1B869EF1}.Release|x64.ActiveCfg = Release|Win32
+		{246DB63D-CF72-435D-8FFE-7EBA1B869EF1}.Release|x86.ActiveCfg = Release|Win32
+		{246DB63D-CF72-435D-8FFE-7EBA1B869EF1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C569116B-1A26-46B4-96EE-F28E8D9CAF45}
 	EndGlobalSection
 EndGlobal

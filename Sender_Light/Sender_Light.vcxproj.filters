@@ -22,9 +22,6 @@
     <None Include="Sleeping.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.Sender_Light.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Shared\NetworkAddresses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -38,6 +35,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Shared\WeatherData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.Sender_Light.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,21 +1,13 @@
+
 #ifndef _UTILITIES_h
 #define _UTILITIES_h
 
-#include <arduino.h>
+
+#include "WeatherData.h"
+#include "Settings.h"
+#include <Arduino.h>
 #include <avr/wdt.h>
 
-//typedef enum {
-//	wdt_16ms = 0,
-//	wdt_32ms,
-//	wdt_64ms,
-//	wdt_128ms,
-//	wdt_250ms,
-//	wdt_500ms,
-//	wdt_1s, wdt_2s,
-//	wdt_4s, wdt_8s
-//} wdt_prescalar_e;
-
-#define WATCHDOG_RESET_TIME	WDTO_8S
 
 #define STOP_HERE()				while(true) { ; }
 #define STOP_HERE_LED(_LED_)	while(true) { _LED_.blinkLed(1, 444, 1555); }
@@ -34,24 +26,37 @@
 		} \
 	} while (false)
 
-#define PROTECT_WITH_WDT(_wdt_enabled_, _body_)	\
+#if WATCHDOG_ENABLED
+#define PROTECT_WITH_WDT(_body_)	\
 	do { \
-		if (_wdt_enabled_) { \
-			wdt_reset(); \
-			wdt_enable(WATCHDOG_RESET_TIME); \
-		} \
+		wdt_reset(); \
+		wdt_enable(WATCHDOG_RESET_TIME); \
 		_body_ \
-		if (_wdt_enabled_) { \
-			wdt_disable(); \
-		} \
+		wdt_disable(); \
 	} while(false)
+#else
+	#define PROTECT_WITH_WDT(_body_)	\
+	do { \
+		_body_ \
+	} while(false)
+#endif
 
 
 // Helper Functions
 /////////////////////////////////////////////////////////
 
+#if WATCHDOG_ENABLED
+extern void initializeWdtOnStartup(void);
+#endif
+
+extern uint16_t getVoltage_mV(uint8_t voltagePin);
+
 extern void rebootDevice(void);
+
+#if DEBUG_ENABLED
+extern void printWeatherData(WeatherData &data);
 extern int getFreeRam(void);
 extern void printFreeRam(void);
+#endif
 
 #endif

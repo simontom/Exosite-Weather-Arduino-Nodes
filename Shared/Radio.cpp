@@ -11,7 +11,10 @@ void Radio::init(LEDutilities &led) {
 		#if DEBUG_ENABLED
 				Serial.println(F("Radio: ERROR"));
 		#endif
-		STOP_HERE_LED(led);
+
+		PROTECT_WITH_WDT(
+			STOP_HERE_LED(led);
+		);
 	}
 	else {
 	#if DEBUG_ENABLED
@@ -27,6 +30,11 @@ void Radio::init(LEDutilities &led) {
 	manager->setTimeout(TIMEOUT);
 	manager->setRetries(RETRIES);
 	}
+
+	#if DEBUG_ENABLED
+		Serial.println(F("initRadio end"));
+		printFreeRam();
+	#endif
 }
 
 void Radio::maintainRouting(void) {
@@ -37,7 +45,7 @@ void Radio::maintainRouting(void) {
 	}
 }
 
-void Radio::sendData(WeatherData &data, LEDutilities &led, uint8_t destinationAddress) {
+void Radio::sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led) {
 	#if DEBUG_ENABLED
 		Serial.println(F("sending"));
 		printFreeRam();
@@ -47,20 +55,22 @@ void Radio::sendData(WeatherData &data, LEDutilities &led, uint8_t destinationAd
 
 	#if DEBUG_ENABLED
 		switch (error) {
-		case RH_ROUTER_ERROR_NONE:
-			Serial.println(F("Sent to next hop"));
-			break;
-		case RH_ROUTER_ERROR_NO_ROUTE:
-			Serial.println(F("No route in routing table"));
-			break;
-		case RH_ROUTER_ERROR_UNABLE_TO_DELIVER:
-			Serial.println(F("Unable to deliver to next hop"));
-			break;
+			case RH_ROUTER_ERROR_NONE:
+				Serial.println(F("Sent to next hop"));
+				break;
+			case RH_ROUTER_ERROR_NO_ROUTE:
+				Serial.println(F("No route in routing table"));
+				break;
+			case RH_ROUTER_ERROR_UNABLE_TO_DELIVER:
+				Serial.println(F("Unable to deliver to next hop"));
+				break;
 		}
 	#endif
 
 	if (error != RH_ROUTER_ERROR_NONE) {
-		led.onLed();
+		if (led != nullptr) {
+			led->onLed();
+		}
 
 		#if WATCHDOG_ENABLED
 			tx_errors_counter++;
@@ -74,11 +84,13 @@ void Radio::sendData(WeatherData &data, LEDutilities &led, uint8_t destinationAd
 		#endif
 	}
 	else {
-		led.offLed();
+		if (led != nullptr) {
+			led->offLed();
+		}
 
-	#if WATCHDOG_ENABLED
+		#if WATCHDOG_ENABLED
 			tx_errors_counter = 0;
-	#endif
+		#endif
 	}
 
 	#if DEBUG_ENABLED
@@ -91,3 +103,10 @@ void Radio::sendData(WeatherData &data, LEDutilities &led, uint8_t destinationAd
 	#endif
 }
 
+inline void Radio::printRoutingTable(void) {
+	manager->printRoutingTable();
+}
+
+inline int16_t Radio::getLastRssi(void) {
+	return driver->lastRssi();
+}
