@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Node_Tester.ino" />
-    <None Include="InitFunctions.ino" />
     <None Include="RadioRoutines.ino" />
   </ItemGroup>
   <ItemGroup>

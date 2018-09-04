@@ -1,63 +1,43 @@
 
-// INCLUDES
-////////////
-#include "NetworkAddresses.h"
 #include "Settings.h"
 #include "WeatherData.h"
+#include "Radio.h"
+#include "Utilities.h"
 #include <SPI.h>
 #include <LEDutilities.h>
+
 #include <RH_RF22.h>
-#if USE_MESH_LIBRARY
 #include <RHMesh.h>
-#else
-#include <RHRouter.h>
-#endif
 
 
-// Hardware configuration
-////////
-
-// Pins
 #define LED_PIN 9
+#define DATA_LENGTH	2
+
 
 LEDutilities led(LED_PIN);
+Radio manager(TESTING_NODE_ADDR, SLAVE_SELECT_PIN, INTERRUPT_PIN);
 
-// Wireless Transceivers
-RH_RF22 driver(3, 2);
-#if USE_MESH_LIBRARY
-RHMesh manager(driver, TESTING_NODE_ADDR);
-#else
-RHRouter manager(driver, TESTING_NODE_ADDR);
-#endif
-
-
-void printHelp(void) {
-	//Serial.println(F("Unknown Command"));
-	Serial.println(F("nXXX - checkNode"));
-	Serial.println(F("a - addresses"));
-	Serial.println(F("t - routingTable"));
-}
+uint8_t helloData[DATA_LENGTH]	= { B10101010,	B01010101 };
+uint8_t rcvdData[DATA_LENGTH]	= { 0,			0 };
 
 
 void processSerialCommand(char c) {
-	if (c == 'n') {
-		if (Serial.available()) {
-			int nodeAddr = Serial.parseInt();
-			checkNode(nodeAddr);
-		}
-		else {
-			Serial.println(F("NodeAddr not specified"));
-		}
-	}
-	else if (c == 'a') {
-		printPossibleAddresses();
-	}
-	else if (c == 't') {
-		manager.printRoutingTable();
-		printRssi();
-	}
-	else {
-		printHelp();
+	switch (c) {
+		case 'n':
+			checkNode();
+			break;
+
+		case 'a':
+			printAddressesList();
+			break;
+
+		case 'i':
+			printTransceiverInfo();
+			break;
+
+		default:
+			printHelp();
+			break;
 	}
 
 	Serial.flush();
@@ -68,12 +48,12 @@ void processSerialCommand(char c) {
 void setup(void) {
 	Serial.begin(57600);
 
-	printPossibleAddresses();
+	printAddressesList();
 	Serial.println();
 	printHelp();
 	Serial.println();
 	
-	initRadio();
+	manager.init(led);
 	Serial.println();
 
 	led.blinkLed(3, 222);
@@ -86,5 +66,5 @@ void loop(void) {
 		processSerialCommand(command);
 	}
 
-	maintainRouting();
+	manager.maintainRouting();
 }

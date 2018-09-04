@@ -46,6 +46,15 @@ void rebootDevice(void) {
 }
 
 #if DEBUG_ENABLED
+boolean cmp8bitArrays(uint8_t* a1, uint8_t* a2, const uint8_t len) {
+	for (uint8_t i = 0; i < len; i++) {
+		if (a1[i] != a2[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void printWeatherData(WeatherData &data) {
 	Serial.print(data.getTemperature());
 	Serial.println(F("*C"));

@@ -61,11 +61,11 @@ void loop(void) {
 	if (sensors.readSensors(weatherData)) {
 		#if DEBUG_ENABLED
 		PROTECT_WITH_WDT(
-			manager.sendData(SINK_NODE_ADDR, weatherData, &redLed);
+			manager.sendWeatherData(SINK_NODE_ADDR, weatherData, &redLed);
 		);
 		#else
 		PROTECT_WITH_WDT(
-			manager.sendData(SINK_NODE_ADDR, weatherData);
+			manager.sendWeatherData(SINK_NODE_ADDR, weatherData);
 		);
 		#endif
 	}

@@ -53,6 +53,8 @@ extern uint16_t getVoltage_mV(uint8_t voltagePin);
 extern void rebootDevice(void);
 
 #if DEBUG_ENABLED
+extern boolean cmp8bitArrays(uint8_t* a1, uint8_t* a2, const uint8_t len);
+
 extern void printWeatherData(WeatherData &data);
 extern int getFreeRam(void);
 extern void printFreeRam(void);

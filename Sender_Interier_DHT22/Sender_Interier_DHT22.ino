@@ -66,7 +66,7 @@ void loop(void) {
 			#if WATCHDOG_ENABLED
 			wdt_reset();
 			#endif
-			manager.sendData(SINK_NODE_ADDR, weatherData, &led);
+			manager.sendWeatherData(SINK_NODE_ADDR, weatherData, &led);
 		}
 	);
 

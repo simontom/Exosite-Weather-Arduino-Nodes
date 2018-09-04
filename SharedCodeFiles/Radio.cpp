@@ -39,21 +39,21 @@ void Radio::init(LEDutilities &led) {
 
 void Radio::maintainRouting(void) {
 	// Call "recvfromAck" to do all the routing/mesh discovery/internal magic
-	uint8_t len = buffLen;
-	if (manager->recvfromAck(buff, &len, &from)) {
+	uint8_t length = buffLen;
+	if (manager->recvfromAck(buff, &length, &from)) {
 		#if DEBUG_ENABLED
 		Serial.print(F("\nfrom 0x"));
 		Serial.print(from, HEX);
 		Serial.print(F(" dataContainer length "));
-		Serial.print(len);
+		Serial.print(length);
 		Serial.print(F(" _ "));
 		Serial.println(millis());
 		#endif
-		manager->sendtoWait(buff, len, from);
+		manager->sendtoWait(buff, length, from);
 	}
 }
 
-void Radio::receiveAndProcess(WeatherData &dataContainer, ReceivedDataProcessor dataProcessor) {
+void Radio::receiveWeatherDataAndProcess(WeatherData &dataContainer, WeatherDataProcessor dataProcessor) {
 	uint8_t dataLen = dataContainer.getDataLength();
 	if (manager->recvfromAck(dataContainer.getDataPointer(), &dataLen, &from)) {
 		#if DEBUG_ENABLED
@@ -72,14 +72,24 @@ void Radio::receiveAndProcess(WeatherData &dataContainer, ReceivedDataProcessor 
 	}
 }
 
-void Radio::sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led) {
+void Radio::receiveDataAndProcessWithTimeout(uint8_t *buffer, uint8_t length, uint16_t timeout, DataProcessor dataProcessor) {
+	boolean isReceivedSuccessfully = manager->recvfromAckTimeout(buffer, &length, timeout, &from);
+	dataProcessor(isReceivedSuccessfully, from, length, buffer);
+}
+
+boolean Radio::sendWeatherData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led) {
+	return sendData(destinationAddress, data.getDataPointer(), data.getDataLength(), led);
+}
+
+boolean Radio::sendData(uint8_t destinationAddress, uint8_t *data, uint8_t length, LEDutilities *led) {
 	#if DEBUG_ENABLED
 	Serial.print(F("\nsending_"));
 	Serial.println(millis());
 	printFreeRam();
 	#endif
 
-	uint8_t error = manager->sendtoWait(data.getDataPointer(), data.getDataLength(), destinationAddress);
+	uint8_t error = manager->sendtoWait(data, length, destinationAddress);
+	boolean isSentSuccessfully = error == RH_ROUTER_ERROR_NONE;
 
 	#if DEBUG_ENABLED
 	switch (error) {
@@ -95,7 +105,16 @@ void Radio::sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities
 	}
 	#endif
 
-	if (error != RH_ROUTER_ERROR_NONE) {
+	if (isSentSuccessfully) {
+		if (led != nullptr) {
+			led->offLed();
+		}
+
+		#if WATCHDOG_ENABLED
+		tx_errors_counter = 0;
+		#endif
+	}
+	else {
 		if (led != nullptr) {
 			led->onLed();
 		}
@@ -111,15 +130,6 @@ void Radio::sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities
 		}
 		#endif
 	}
-	else {
-		if (led != nullptr) {
-			led->offLed();
-		}
-
-		#if WATCHDOG_ENABLED
-		tx_errors_counter = 0;
-		#endif
-	}
 
 	#if DEBUG_ENABLED
 	manager->printRoutingTable();
@@ -131,6 +141,8 @@ void Radio::sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities
 	Serial.println(F("\n"));
 	delay(111);
 	#endif
+
+	return isSentSuccessfully;
 }
 
 void Radio::printRoutingTable(void) {

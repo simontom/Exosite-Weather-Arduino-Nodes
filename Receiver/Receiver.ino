@@ -18,7 +18,7 @@
 
 LEDutilities led(LED_PIN);
 WeatherData weatherData;
-Radio manager(OUTSIDE_NODE_ADDR, SLAVE_SELECT_PIN, INTERRUPT_PIN);
+Radio manager(SINK_NODE_ADDR, SLAVE_SELECT_PIN, INTERRUPT_PIN);
 
 #if SINK_ENABLE_SENSOR
 SensorDht22Interier sensor(manager, DHT22_DATA_PIN);
@@ -43,7 +43,7 @@ void loop(void) {
 	wdt_reset();
 	#endif
 
-	manager.receiveAndProcess(weatherData, &sendDataToRasPi);
+	manager.receiveWeatherDataAndProcess(weatherData, &sendDataToRasPi);
 
 	//handleSerialData();
 

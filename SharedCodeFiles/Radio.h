@@ -26,7 +26,8 @@ const uint8_t SYNC_WORDS[]	=		{ 0xD3, 0x3D };
 #define MAX_TX_ERRORS_BEFORE_RESET	5
 
 
-typedef void(*ReceivedDataProcessor)(uint8_t from);
+typedef void(*WeatherDataProcessor)(uint8_t from);
+typedef void(*DataProcessor)(boolean isReceivedSuccessfully, uint8_t from, uint8_t length, uint8_t *data);
 
 
 class Radio {
@@ -34,9 +35,14 @@ class Radio {
 	public:
 	Radio(uint8_t address, uint8_t slaveSelectPin = SLAVE_SELECT_PIN, uint8_t interruptPin = INTERRUPT_PIN);
 	void init(LEDutilities &led);
+
 	void maintainRouting(void);
-	void receiveAndProcess(WeatherData &dataContainer, ReceivedDataProcessor dataProcessor);
-	void sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led = nullptr);
+	void receiveWeatherDataAndProcess(WeatherData &dataContainer, WeatherDataProcessor dataProcessor);
+	void receiveDataAndProcessWithTimeout(uint8_t *buffer, uint8_t len, uint16_t timeout, DataProcessor dataProcessor);
+
+	boolean sendWeatherData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led = nullptr);
+	boolean sendData(uint8_t destinationAddress, uint8_t * data, uint8_t length, LEDutilities *led = nullptr);
+
 	inline void sleep(void) const { driver->sleep(); }
 
 	void printRoutingTable(void);
