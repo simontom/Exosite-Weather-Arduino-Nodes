@@ -42,14 +42,33 @@ void Radio::maintainRouting(void) {
 	uint8_t len = buffLen;
 	if (manager->recvfromAck(buff, &len, &from)) {
 		#if DEBUG_ENABLED
-		Serial.print(F("received from "));
-		Serial.print(from);
-		Serial.print(F(" data length "));
+		Serial.print(F("\nfrom 0x"));
+		Serial.print(from, HEX);
+		Serial.print(F(" dataContainer length "));
 		Serial.print(len);
 		Serial.print(F(" _ "));
 		Serial.println(millis());
 		#endif
 		manager->sendtoWait(buff, len, from);
+	}
+}
+
+void Radio::receiveAndProcess(WeatherData &dataContainer, ReceivedDataProcessor dataProcessor) {
+	uint8_t dataLen = dataContainer.getDataLength();
+	if (manager->recvfromAck(dataContainer.getDataPointer(), &dataLen, &from)) {
+		#if DEBUG_ENABLED
+		Serial.print(F("\nfrom 0x"));
+		Serial.print(from, HEX);
+		Serial.print(F(" at: "));
+		Serial.println(millis());
+		#endif
+
+		dataProcessor(from);
+
+		#if DEBUG_ENABLED
+		Serial.print(F("RSSI: "));
+		Serial.println(driver.lastRssi());
+		#endif
 	}
 }
 

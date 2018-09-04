@@ -12,9 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Receiver.ino" />
-    <None Include="HandlingDataFunctions.ino" />
-    <None Include="InitFunctions.ino" />
-    <None Include="Sensors.ino" />
+    <None Include="DataProcessor.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Receiver.vsarduino.h">

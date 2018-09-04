@@ -19,11 +19,14 @@
 /////////////////////////////////////////////////////////
 #define TIMEOUT						320
 #define RETRIES						3
-const uint8_t SYNC_WORDS[] =		{ 0xD3, 0x3D };
+const uint8_t SYNC_WORDS[]	=		{ 0xD3, 0x3D };
 #define RADIO_MODEM_CONFIG			RH_RF22::GFSK_Rb19_2Fd9_6
 #define RADIO_POWER					RH_RF22_TXPOW_8DBM
 #define RADIO_POWER_LOWER			RH_RF22_TXPOW_5DBM
 #define MAX_TX_ERRORS_BEFORE_RESET	5
+
+
+typedef void(*ReceivedDataProcessor)(uint8_t from);
 
 
 class Radio {
@@ -32,6 +35,7 @@ class Radio {
 	Radio(uint8_t address, uint8_t slaveSelectPin = SLAVE_SELECT_PIN, uint8_t interruptPin = INTERRUPT_PIN);
 	void init(LEDutilities &led);
 	void maintainRouting(void);
+	void receiveAndProcess(WeatherData &dataContainer, ReceivedDataProcessor dataProcessor);
 	void sendData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led = nullptr);
 	inline void sleep(void) const { driver->sleep(); }
 
