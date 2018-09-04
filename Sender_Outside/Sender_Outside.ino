@@ -7,7 +7,9 @@
 #include "Sleeper.h"
 #include "SensorDht22Exterier.h"
 
+#if !DEBUG_ENABLED
 #include <avr/power.h>
+#endif
 #include <LEDutilities.h>
 
 
