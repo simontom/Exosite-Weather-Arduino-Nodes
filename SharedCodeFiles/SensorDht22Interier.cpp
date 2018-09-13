@@ -2,11 +2,11 @@
 #include "SensorDht22Interier.h"
 
 
-SensorDht22Interier::SensorDht22Interier(Radio &manager, uint8_t sensorDataPin, boolean is8Mhz) : manager(manager) {
+SensorDht22Interier::SensorDht22Interier(Radio &manager, uint8_t sensorDataPin, bool is8Mhz) : manager(manager) {
 	dht22 = new DHT_LITE(sensorDataPin, is8Mhz, DHT22);
 }
 
-boolean SensorDht22Interier::readDataFromSensors(WeatherData &data) {
+bool SensorDht22Interier::readDataFromSensors(WeatherData &data) {
 	uint8_t iter = 0;
 
 	for (;;) {

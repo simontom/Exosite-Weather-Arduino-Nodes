@@ -17,13 +17,13 @@
 class SensorDht22Interier : public SensorBase {
 
 	public:
-		SensorDht22Interier(Radio &manager, uint8_t sensorDataPin, boolean is8Mhz = false);
+		SensorDht22Interier(Radio &manager, uint8_t sensorDataPin, bool is8Mhz = false);
 
 	protected:
 		DHT_LITE *dht22;
 		Radio &manager;
 
-		virtual boolean readDataFromSensors(WeatherData &data);
+		virtual bool readDataFromSensors(WeatherData &data);
 
 };
 

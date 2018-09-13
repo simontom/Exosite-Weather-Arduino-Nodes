@@ -19,16 +19,16 @@
 class SensorDht22Exterier : public SensorDht22Interier {
 
 	public:
-		SensorDht22Exterier(Radio &manager, uint8_t sensorDataPin, uint8_t sensorSupplyPin, boolean is8Mhz = false);
+		SensorDht22Exterier(Radio &manager, uint8_t sensorDataPin, uint8_t sensorSupplyPin, bool is8Mhz = false);
 
 	protected:
 		uint8_t sensorSupplyPin;
 		LiFuelGauge *liFuelGauge;
 
-		virtual boolean readDataFromSensors(WeatherData &data);
+		virtual bool readDataFromSensors(WeatherData &data);
 
 	private:
-		inline void setSensorSupplyState(boolean turnOn);
+		inline void setSensorSupplyState(bool turnOn);
 		inline void sensorOn(void);
 		inline void sensorOff(void);
 

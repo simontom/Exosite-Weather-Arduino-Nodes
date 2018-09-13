@@ -73,15 +73,15 @@ void Radio::receiveWeatherDataAndProcess(WeatherData &dataContainer, WeatherData
 }
 
 void Radio::receiveDataAndProcessWithTimeout(uint8_t *buffer, uint8_t length, uint16_t timeout, DataProcessor dataProcessor) {
-	boolean isReceivedSuccessfully = manager->recvfromAckTimeout(buffer, &length, timeout, &from);
+	bool isReceivedSuccessfully = manager->recvfromAckTimeout(buffer, &length, timeout, &from);
 	dataProcessor(isReceivedSuccessfully, from, length, buffer);
 }
 
-boolean Radio::sendWeatherData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led) {
+bool Radio::sendWeatherData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led) {
 	return sendData(destinationAddress, data.getDataPointer(), data.getDataLength(), led);
 }
 
-boolean Radio::sendData(uint8_t destinationAddress, uint8_t *data, uint8_t length, LEDutilities *led) {
+bool Radio::sendData(uint8_t destinationAddress, uint8_t *data, uint8_t length, LEDutilities *led) {
 	#if DEBUG_ENABLED
 	Serial.print(F("\nsending_"));
 	Serial.println(millis());
@@ -89,7 +89,7 @@ boolean Radio::sendData(uint8_t destinationAddress, uint8_t *data, uint8_t lengt
 	#endif
 
 	uint8_t error = manager->sendtoWait(data, length, destinationAddress);
-	boolean isSentSuccessfully = error == RH_ROUTER_ERROR_NONE;
+	bool isSentSuccessfully = error == RH_ROUTER_ERROR_NONE;
 
 	#if DEBUG_ENABLED
 	switch (error) {

@@ -2,7 +2,7 @@
 #include "SensorDht22Exterier.h"
 
 
-SensorDht22Exterier::SensorDht22Exterier(Radio &manager, uint8_t sensorDataPin, uint8_t sensorSupplyPin, boolean is8Mhz)
+SensorDht22Exterier::SensorDht22Exterier(Radio &manager, uint8_t sensorDataPin, uint8_t sensorSupplyPin, bool is8Mhz)
 	: SensorDht22Interier(manager, sensorDataPin, is8Mhz), sensorSupplyPin(sensorSupplyPin) {
 
 	dht22 = new DHT_LITE(sensorDataPin, is8Mhz, DHT22);
@@ -10,8 +10,8 @@ SensorDht22Exterier::SensorDht22Exterier(Radio &manager, uint8_t sensorDataPin, 
 	//liFuelGauge->reset();
 }
 
-boolean SensorDht22Exterier::readDataFromSensors(WeatherData &data) {
-	boolean isDataCorrect = false;
+bool SensorDht22Exterier::readDataFromSensors(WeatherData &data) {
+	bool isDataCorrect = false;
 	sensorOn();
 	isDataCorrect = SensorDht22Interier::readDataFromSensors(data);
 	sensorOff();
@@ -24,7 +24,7 @@ boolean SensorDht22Exterier::readDataFromSensors(WeatherData &data) {
 
 // Sensor Supply logic
 ///////////////////////
-void SensorDht22Exterier::setSensorSupplyState(boolean turnOn) {
+void SensorDht22Exterier::setSensorSupplyState(bool turnOn) {
 	pinMode(sensorSupplyPin, (turnOn ? OUTPUT : INPUT));
 	digitalWrite(sensorSupplyPin, (turnOn ? HIGH : LOW));
 }

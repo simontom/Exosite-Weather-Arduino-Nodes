@@ -11,10 +11,10 @@
 class SensorBase {
 	
 	public:
-		boolean readSensors(WeatherData &data);
+		bool readSensors(WeatherData &data);
 
 	protected:
-		virtual boolean readDataFromSensors(WeatherData &data) = 0;
+		virtual bool readDataFromSensors(WeatherData &data) = 0;
 
 };
 

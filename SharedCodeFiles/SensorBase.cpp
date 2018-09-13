@@ -2,8 +2,8 @@
 #include "SensorBase.h"
 
 
-boolean SensorBase::readSensors(WeatherData &data) {
-	boolean isSuccessful = false;
+bool SensorBase::readSensors(WeatherData &data) {
+	bool isSuccessful = false;
 
 	#if DEBUG_ENABLED
 	Serial.print(F("\nsensing_"));

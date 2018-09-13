@@ -27,7 +27,7 @@ const uint8_t SYNC_WORDS[]	=		{ 0xD3, 0x3D };
 
 
 typedef void(*WeatherDataProcessor)(uint8_t from);
-typedef void(*DataProcessor)(boolean isReceivedSuccessfully, uint8_t from, uint8_t length, uint8_t *data);
+typedef void(*DataProcessor)(bool isReceivedSuccessfully, uint8_t from, uint8_t length, uint8_t *data);
 
 
 class Radio {
@@ -40,8 +40,8 @@ class Radio {
 	void receiveWeatherDataAndProcess(WeatherData &dataContainer, WeatherDataProcessor dataProcessor);
 	void receiveDataAndProcessWithTimeout(uint8_t *buffer, uint8_t len, uint16_t timeout, DataProcessor dataProcessor);
 
-	boolean sendWeatherData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led = nullptr);
-	boolean sendData(uint8_t destinationAddress, uint8_t * data, uint8_t length, LEDutilities *led = nullptr);
+	bool sendWeatherData(uint8_t destinationAddress, WeatherData &data, LEDutilities *led = nullptr);
+	bool sendData(uint8_t destinationAddress, uint8_t * data, uint8_t length, LEDutilities *led = nullptr);
 
 	inline void sleep(void) const { driver->sleep(); }
 
