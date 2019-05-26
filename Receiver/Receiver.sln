@@ -13,9 +13,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sender_Light", "..\Sender_L
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sender_Interier_DHT22", "..\Sender_Interier_DHT22\Sender_Interier_DHT22.vcxproj", "{C6BB011C-315B-4AA4-966A-92C2ACC98FA3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sender_Hallway", "..\Sender_Hallway\Sender_Hallway.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharedCodeProject", "..\SharedCodeProject\SharedCodeProject.vcxitems", "{48B6CD0B-5439-4A26-9178-B5FFE3893E7B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sender_Hallway", "..\Sender_Hallway\Sender_Hallway.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
