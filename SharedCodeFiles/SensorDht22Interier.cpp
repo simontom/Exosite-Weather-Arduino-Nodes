@@ -12,7 +12,7 @@ bool SensorDht22Interier::readDataFromSensors(WeatherData &data) {
 	for (;;) {
 		dht22->doReadings();
 		#if WATCHDOG_ENABLED
-		wdt_reset();
+			wdt_reset();
 		#endif
 		delay(DELAY_BETWEEN_DHT22_READINGS_MS);
 		manager.maintainRouting();
