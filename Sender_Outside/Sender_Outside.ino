@@ -21,7 +21,7 @@
 WeatherData weatherData;
 Radio manager(OUTSIDE_NODE_ADDR, SLAVE_SELECT_PIN, INTERRUPT_PIN);
 Sleeper sleeper(manager);
-SensorDht22Exterier sensors(manager, DATA_DHT_22_PIN, SUPPLY_DHT22_PIN);
+SensorDht22Exterier sensors(manager, DATA_DHT_22_PIN, SUPPLY_DHT22_PIN, true);
 
 LEDutilities redLed(LED_RED_PIN);
 LEDutilities greenLed(LED_GREEN_PIN);
