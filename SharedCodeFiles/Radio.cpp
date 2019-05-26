@@ -67,7 +67,7 @@ void Radio::receiveWeatherDataAndProcess(WeatherData &dataContainer, WeatherData
 
 		#if DEBUG_ENABLED
 		Serial.print(F("RSSI: "));
-		Serial.println(driver.lastRssi());
+		Serial.println(driver->lastRssi());
 		#endif
 	}
 }
