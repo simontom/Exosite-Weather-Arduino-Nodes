@@ -29,17 +29,17 @@ LEDutilities greenLed(LED_GREEN_PIN);
 
 void setup(void) {
 	#if WATCHDOG_ENABLED
-	initializeWdtOnStartup();
+		initializeWdtOnStartup();
 	#endif
 
 	#if DEBUG_ENABLED
-	Serial.begin(57600);
-	printFreeRam();
+		Serial.begin(57600);
+		printFreeRam();
 	#endif
 
 	PROTECT_WITH_WDT(
 		#if !DEBUG_ENABLED
-		power_usart0_disable();
+			power_usart0_disable();
 		#endif
 		//power_twi_disable();
 
@@ -55,18 +55,18 @@ void setup(void) {
 
 void loop(void) {
 	#if DEBUG_ENABLED
-	printFreeRam();
+		printFreeRam();
 	#endif
 
 	if (sensors.readSensors(weatherData)) {
 		#if DEBUG_ENABLED
-		PROTECT_WITH_WDT(
-			manager.sendWeatherData(SINK_NODE_ADDR, weatherData, &redLed);
-		);
+			PROTECT_WITH_WDT(
+				manager.sendWeatherData(SINK_NODE_ADDR, weatherData, &redLed);
+			);
 		#else
-		PROTECT_WITH_WDT(
-			manager.sendWeatherData(SINK_NODE_ADDR, weatherData);
-		);
+			PROTECT_WITH_WDT(
+				manager.sendWeatherData(SINK_NODE_ADDR, weatherData);
+			);
 		#endif
 	}
 
