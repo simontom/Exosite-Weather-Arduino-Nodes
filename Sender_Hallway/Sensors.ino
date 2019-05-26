@@ -12,7 +12,7 @@ void readSensors(void) {
 	weatherData.setPressure(pressure);
 
 	#if DEBUG_ENABLED && true
-		Serial.println(weatherData.pressure);
+		Serial.println(weatherData.getPressure());
 		Serial.println(F("sensed"));
 	#endif
 }

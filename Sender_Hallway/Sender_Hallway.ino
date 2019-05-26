@@ -1,76 +1,46 @@
 
-// INCLUDES
-////////////
-#include "NetworkAddresses.h"
+#include "Radio.h"
 #include "Settings.h"
+#include "Utilities.h"
 #include "WeatherData.h"
-#include <SPI.h>
-#include <I2C_Rev5\I2C.h>
+
 #include <BMP180.h>
+
 #include <LEDutilities.h>
-#include <RH_RF22.h>
-#if USE_MESH_LIBRARY
-#include <RHMesh.h>
-#else
-#include <RHRouter.h>
-#endif
 
 
 // Hardware configuration
 ////////
-
-// Pins
 #define LED_PIN 9
 
-// Sensors
-BMP180 bmp180;
 WeatherData weatherData;
-
+Radio manager(HALLWAY_NODE_ADDR, SLAVE_SELECT_PIN, INTERRUPT_PIN);
+BMP180 bmp180;
 LEDutilities led(LED_PIN);
 
 unsigned long lastSendingTime = SENDING_PERIOD;
-unsigned long lastDebugLedBlink = LED_BLINKING_PERIOD;
+unsigned long lastLedBlinkTime = LED_BLINKING_PERIOD;
 unsigned long now;
-
-// Wireless Transceivers
-RH_RF22 driver(3, 2);
-#if USE_MESH_LIBRARY
-RHMesh manager(driver, HALLWAY_NODE_ADDR);
-#else
-RHRouter manager(driver, VERANDA_NODE_ADDR);
-#endif
-
-// Watchdog
-#define WATCHDOG_ENABLED true
-#if WATCHDOG_ENABLED
-uint8_t tx_errors_counter = 0;
-#endif
 
 
 void setup(void) {
 	#if WATCHDOG_ENABLED
-		wdt_disable();
-		delay(2);
-		wdt_reset();
-		wdt_enable(WATCHDOG_RESET_TIME);
+		initializeWdtOnStartup();
 	#endif
 
-	#if DEBUG_ENABLED && true
+	#if DEBUG_ENABLED
 		Serial.begin(57600);
 		printFreeRam(); ////
 	#endif
 	
 	initBMP180();
-
-	initRadio();
+	manager.init(led);
 
 	#if WATCHDOG_ENABLED
 		wdt_reset();
 	#endif
 
 	led.blinkLed(3, 222);
-
-	//printFreeRam(); ////
 }
 
 
@@ -84,22 +54,22 @@ void loop(void) {
 	TIME_DRIVEN_EVENT(now, lastSendingTime, SENDING_PERIOD,
 		readSensors();
 		if (weatherData.getPressure() != (-1)) {
-			sendData();
+			manager.sendWeatherData(SINK_NODE_ADDR, weatherData, &led);
 		}
 	);
 
-	TIME_DRIVEN_EVENT(now, lastDebugLedBlink, LED_BLINKING_PERIOD,
+	TIME_DRIVEN_EVENT(now, lastLedBlinkTime, LED_BLINKING_PERIOD,
 		led.toggleLed(2, 28);
 	);
 
-	maintainRouting();
+	manager.maintainRouting();
 
 	#if DEBUG_ENABLED && true
 		if (Serial.available()) {
 			if (Serial.read() == 'i') {
 				manager.printRoutingTable();
 				Serial.print(F("RSSI: "));
-				Serial.println(driver.lastRssi());
+				Serial.println(manager.getLastRssi());
 				printFreeRam(); ////
 				Serial.println();
 			}
