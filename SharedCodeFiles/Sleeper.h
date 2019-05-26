@@ -12,11 +12,8 @@
 
 // Settings
 /////////////////////////////////////////////////////////
-#if DEBUG_ENABLED
-#define SLEEP_CYCLES_PER_TRANSMISSION					3 /* +- 3 * 8s = 24 seconds */
-#else
+#define SLEEP_CYCLES_PER_TRANSMISSION_DEBUG					4 /* +- 4 * 8s = 32 seconds */
 #define SLEEP_CYCLES_PER_TRANSMISSION					112 /* +- 112 * 8s = 15 minutes */
-#endif
 //#define SLEEP_CYCLES_PER_TRANSMISSION					225 /* +- 225 * 8s = 30 minutes */
 //#define SLEEP_CYCLES_PER_TRANSMISSION					300 /* +- 300 * 8s = 40 minutes */
 #define SLEEP_CYCLES_PER_TRANSMISSION_ON_LOW_ENERGY		225 /* +- 225 * 8s = 30 minutes */
