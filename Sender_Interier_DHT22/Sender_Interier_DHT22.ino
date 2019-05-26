@@ -12,7 +12,7 @@
 ////////
 //#define NODE_ADDR	BEDROOM_NODE_ADDR
 //#define NODE_ADDR	BATHROOM_NODE_ADDR
-#define NODE_ADDR	LIVROOM_NODE_ADDR
+//#define NODE_ADDR	LIVROOM_NODE_ADDR
 
 // Hardware configuration
 ////////
@@ -30,25 +30,19 @@ unsigned long now;
 
 
 void setup(void) {
-	wdt_disable();
-	wdt_reset();
-
 	#if WATCHDOG_ENABLED
-	wdt_disable();
-	delay(2);
-	wdt_reset();
-	wdt_enable(WATCHDOG_RESET_TIME);
+		initializeWdtOnStartup();
 	#endif
 
 	#if DEBUG_ENABLED
-	Serial.begin(57600);
-	printFreeRam(); ////
+		Serial.begin(57600);
+		printFreeRam(); ////
 	#endif
 
 	manager.init(led);
 
 	#if WATCHDOG_ENABLED
-	wdt_reset();
+		wdt_reset();
 	#endif
 
 	led.blinkLed(3, 222);
@@ -56,7 +50,7 @@ void setup(void) {
 
 void loop(void) {
 	#if WATCHDOG_ENABLED
-	wdt_reset();
+		wdt_reset();
 	#endif
 
 	now = millis();
@@ -64,7 +58,7 @@ void loop(void) {
 	TIME_DRIVEN_EVENT(now, lastSendingTime, SENDING_PERIOD,
 		if (sensor.readSensors(weatherData)) {
 			#if WATCHDOG_ENABLED
-			wdt_reset();
+				wdt_reset();
 			#endif
 			manager.sendWeatherData(SINK_NODE_ADDR, weatherData, &led);
 		}
@@ -78,16 +72,16 @@ void loop(void) {
 
 	manager.maintainRouting();
 
-	#if DEBUG_ENABLED
-	if (Serial.available()) {
-		if (Serial.read() == 'i') {
-			manager.printRoutingTable();
-			Serial.print(F("RSSI: "));
-			Serial.println(manager.getLastRssi());
-			printFreeRam(); ////
-			Serial.println();
+	#if DEBUG_ENABLED && true
+		if (Serial.available()) {
+			if (Serial.read() == 'i') {
+				manager.printRoutingTable();
+				Serial.print(F("RSSI: "));
+				Serial.println(manager.getLastRssi());
+				printFreeRam(); ////
+				Serial.println();
+			}
+			Serial.flush();
 		}
-		Serial.flush();
-	}
 	#endif
 }
