@@ -10,7 +10,7 @@
 ////////////////////////////////
 #pragma error("WATCHDOG MUST STAY FALSE UNTIL CORRECT (e.g. Optiboot) BOOTLOADER WITH WDT HANDLING ENABLED IS UPLOADED")
 #define WATCHDOG_ENABLED	true
-#define DEBUG_ENABLED		true
+#define DEBUG_ENABLED		false
 #define SINK_ENABLE_SENSOR	false
 
 #define WATCHDOG_RESET_TIME			WDTO_8S
