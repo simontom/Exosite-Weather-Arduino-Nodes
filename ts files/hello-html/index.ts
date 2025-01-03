@@ -16,13 +16,9 @@ export function getDescription() {
     } as const satisfies ScriptDescription;
 }
 
-
-
-
-export async function execute(context: Context):    Promise<Output> {
-    const stream = await context.openWriteText(
-	context.parameters.response, "utf-8", responseOptions);
-    const writer =     stream.getWriter();
+export async function execute(context: Context): Promise<Output> {
+    const stream = await context.openWriteText(context.parameters.response, "utf-8", responseOptions);
+    const writer = stream.getWriter();
     await writer.write(html);
     await writer.close();
 }
